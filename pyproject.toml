@@ -1,0 +1,78 @@
+[project]
+name = "lovekuhnya-mini-crm-test-task"
+version = "0.1.0"
+description = "Тестовое задание «мини-CRM» с поддержкой нескольких организаций (multi-tenant)"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic==1.17.2",
+    "asyncpg==0.31.0",
+    "coloredlogs==15.0.1",
+    "dishka==1.7.2",
+    "fastapi==0.123.0",
+    "prometheus-fastapi-instrumentator==7.1.0",
+    "pydantic==2.12.5",
+    "pydantic-settings==2.12.0",
+    "python-json-logger==4.0.0",
+    "sqlalchemy==2.0.44",
+    "tzdata==2025.2",
+    "uvicorn[standard]==0.38.0",
+]
+
+[dependency-groups]
+dev = [
+    "freezegun>=1.5.5",
+    "mypy>=1.19.0",
+    "pre-commit>=4.5.0",
+    "pytest>=9.0.1",
+    "pytest-asyncio>=1.3.0",
+    "ruff>=0.14.7",
+]
+
+
+[tool.mypy]
+python_version = "3.13"
+plugins = ["pydantic.mypy"]
+strict = true
+warn_unused_configs = true
+ignore_missing_imports = false
+implicit_reexport = true
+exclude = "(^|/)(.venv|env|build|dist|migrations|alembic)/"
+mypy_path = ["mini_crm"]
+
+[[tool.mypy.overrides]]
+module = ["tests.*", "*.tests_core.*"]
+disallow_untyped_defs = false
+disallow_untyped_calls = false
+warn_return_any = false
+disallow_untyped_decorators = false
+
+[[tool.mypy.overrides]]
+module = [
+    "pytest",
+    "pytest.*",
+    "pytest_mock",
+    "pytest_mock.*",
+    "freezegun",
+    "freezegun.*",
+]
+ignore_missing_imports = true
+
+[tool.ruff]
+src = ["src"]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/**/*" = ["S101"]
+"**/tests_core/**/*" = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+
