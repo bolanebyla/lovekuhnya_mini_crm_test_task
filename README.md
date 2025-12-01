@@ -80,7 +80,7 @@ cd docker-compose/
 docker-compose -f docker-compose.local.yaml -p mini_crm_infrastructure up -d --build 
 ```
 
-### Запуск HTTP API
+### Установка зависимостей
 1. Установите зависимости с помощью uv:
 
 ```bash
