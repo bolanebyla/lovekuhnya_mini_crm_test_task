@@ -14,11 +14,11 @@ from commons.http_api.exception_handlers import app_error_handler
 from mini_crm.infrastructure.http_api.metrics import (
     configure_prometheus_metrics_endpoint,
 )
-from mini_crm.infrastructure.http_api.routers import v1_router
 from mini_crm.infrastructure.http_api.settings import (
     HttpApiPrometheusMetricsSettings,
     HttpApiSettings,
 )
+from mini_crm.infrastructure.http_api.v1 import v1_router
 
 root_router = APIRouter()
 
