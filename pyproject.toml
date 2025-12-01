@@ -37,7 +37,7 @@ warn_unused_configs = true
 ignore_missing_imports = false
 implicit_reexport = true
 exclude = "(^|/)(.venv|env|build|dist|migrations|alembic)/"
-mypy_path = ["mini_crm"]
+mypy_path = ["commons", "mini_crm"]
 
 [[tool.mypy.overrides]]
 module = ["tests.*", "*.tests_core.*"]

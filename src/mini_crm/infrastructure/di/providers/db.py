@@ -1,10 +1,10 @@
+from dishka import Provider, Scope, from_context, provide
+from sqlalchemy.ext.asyncio import AsyncEngine
+
 from commons.db.sqlalchemy import (
     AsyncReadOnlyTransactionContext,
     AsyncTransactionContext,
 )
-from dishka import Provider, Scope, from_context, provide
-from sqlalchemy.ext.asyncio import AsyncEngine
-
 from mini_crm.infrastructure.database.engine import (
     create_async_engine_from_settings,
     create_db_read_only_transaction_context,

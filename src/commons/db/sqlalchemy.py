@@ -97,6 +97,7 @@ class AsyncTransactionContext(AsyncReadOnlyTransactionContext):
         await session.close()
         return False
 
+
 class BaseReadOnlyRepository:
     """
     Базовый класс репозитория только для чтения

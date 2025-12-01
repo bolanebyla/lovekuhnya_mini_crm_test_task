@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Protocol, runtime_checkable
 
@@ -32,7 +32,7 @@ class BaseEntity:
     Базовый класс сущности
     """
 
-    id: EntityId | None = None
+    id: EntityId
     created_at: datetime
     updated_at: datetime
 
