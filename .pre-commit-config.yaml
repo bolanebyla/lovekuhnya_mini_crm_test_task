@@ -27,3 +27,5 @@ repos:
           - sqlalchemy==2.0.44
           - uvicorn[standard]==0.38.0
           - prometheus-fastapi-instrumentator==7.1.0
+          - pytest
+          - pytest-mypy-plugins>=3.2.0

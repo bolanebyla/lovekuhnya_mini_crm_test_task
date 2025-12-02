@@ -25,6 +25,7 @@ dev = [
     "pre-commit>=4.5.0",
     "pytest>=9.0.1",
     "pytest-asyncio>=1.3.0",
+    "pytest-mypy-plugins>=3.2.0",
     "ruff>=0.14.7",
 ]
 
@@ -37,10 +38,10 @@ warn_unused_configs = true
 ignore_missing_imports = false
 implicit_reexport = true
 exclude = "(^|/)(.venv|env|build|dist|migrations|alembic)/"
-mypy_path = ["commons", "mini_crm"]
+mypy_path = ["src", "tests"]
 
 [[tool.mypy.overrides]]
-module = ["tests.*", "*.tests_core.*"]
+module = ["tests.*"]
 disallow_untyped_defs = false
 disallow_untyped_calls = false
 warn_return_any = false
@@ -50,8 +51,6 @@ disallow_untyped_decorators = false
 module = [
     "pytest",
     "pytest.*",
-    "pytest_mock",
-    "pytest_mock.*",
     "freezegun",
     "freezegun.*",
 ]
