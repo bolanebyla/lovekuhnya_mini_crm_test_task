@@ -66,6 +66,14 @@ class HttpApiSettings(BaseSettings):
         return self.CORS_ALLOW_HEADERS.split(",")
 
 
+class ApiSecuritySettings(BaseSettings):
+    SECRET_KEY: str
+    JWT_ALGORITHM: str = "HS256"
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int | float = 10
+    JWT_REFRESH_TOKEN_EXPIRE_MINUTES: int | float = 60 * 24 * 30  # 1 месяц
+    JWT_BEELINE_MOBILE_ID_NOTIFICATION_TOKEN_EXPIRE_MINUTES: int | float = 10
+
+
 class HttpApiPrometheusMetricsSettings(BaseSettings):
     PROMETHEUS_METRICS_ENABLED: bool = True
     PROMETHEUS_METRICS_ENDPOINT: str = "/metrics"

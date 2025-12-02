@@ -1,3 +1,4 @@
+from .auth import AuthProvider
 from .db import DBProvider
 from .db_repositories import DBRepositoriesProvider
 from .operations import OperationsProvider

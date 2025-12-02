@@ -7,11 +7,13 @@ from mini_crm.infrastructure.database.settings import DBSettings
 from mini_crm.infrastructure.di import create_http_api_container
 from mini_crm.infrastructure.http_api.app import create_app
 from mini_crm.infrastructure.http_api.settings import (
+    ApiSecuritySettings,
     HttpApiPrometheusMetricsSettings,
     HttpApiSettings,
 )
 
 api_settings = HttpApiSettings()
+api_security_settings = ApiSecuritySettings()
 api_prometheus_metrics_settings = HttpApiPrometheusMetricsSettings()
 db_settings = DBSettings()
 
@@ -27,6 +29,7 @@ log.configure(
 
 http_api_container = create_http_api_container(
     api_settings=api_settings,
+    api_security_settings=api_security_settings,
     api_prometheus_metrics_settings=api_prometheus_metrics_settings,
     db_settings=db_settings,
 )
@@ -39,7 +42,7 @@ app = create_app(
 
 if __name__ == "__main__":
     logger = logging.getLogger("UvicornDevServer")
-    logger.warning("API is running in development mode")
+    logger.warning("HTTP API запущено в режиме разработки")
 
     uvicorn.run(
         "mini_crm.run.http_api:app",

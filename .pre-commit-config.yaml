@@ -29,3 +29,5 @@ repos:
           - prometheus-fastapi-instrumentator==7.1.0
           - pytest
           - pytest-mypy-plugins>=3.2.0
+          - python-jose[cryptography]==3.5.0
+          - types-python-jose>=3.5.0.20250531

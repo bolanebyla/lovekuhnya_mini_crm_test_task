@@ -94,6 +94,7 @@ uv pip install .
 DB_URL=postgresql+asyncpg://mini_crm:mini_crm@localhost:5432/mini_crm
 LOGGING_LEVEL=INFO
 LOGGING_JSON=False
+SECRET_KEY=strong_secret_key
 ```
 
 ### 📃 Миграции
