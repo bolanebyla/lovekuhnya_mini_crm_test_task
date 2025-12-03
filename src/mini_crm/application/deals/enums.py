@@ -11,7 +11,7 @@ class DealStatuses(StrEnum):
 
 
 class DealStages(StrEnum):
-    """ "Этапы воронки сделок"""
+    """Этапы воронки сделок"""
 
     QUALIFICATION = "qualification"
     PROPOSAL = "proposal"
