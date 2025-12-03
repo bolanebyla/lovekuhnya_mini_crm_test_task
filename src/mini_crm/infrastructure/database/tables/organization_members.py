@@ -28,5 +28,5 @@ organization_members_table = Table(
         nullable=False,
     ),
     UniqueConstraint("organization_id", "user_id"),
-    comment="Члены организации",
+    comment="Участники организации",
 )

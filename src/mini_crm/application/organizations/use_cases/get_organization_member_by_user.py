@@ -10,7 +10,7 @@ from mini_crm.application.organizations.interfaces import (
 
 
 class GetOrganizationMemberByUserUseCase:
-    """Возвращает информацию о членстве пользователя в организации"""
+    """Возвращает информацию об участнике организации"""
 
     def __init__(
         self,

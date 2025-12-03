@@ -14,7 +14,7 @@ class UserOrganizationDto:
 
 @dataclass(kw_only=True)
 class OrganizationMemberDto:
-    """Член организации"""
+    """Участник организации"""
 
     user_id: EntityId
     organization_id: EntityId

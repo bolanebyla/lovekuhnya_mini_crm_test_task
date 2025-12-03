@@ -34,7 +34,7 @@ def upgrade() -> None:
         sa.UniqueConstraint(
             "organization_id", "user_id", name=op.f("uq_organization_members_organization_id")
         ),
-        comment="Члены организации",
+        comment="Участники организации",
     )
     op.create_index(
         op.f("ix_organization_members_user_id"), "organization_members", ["user_id"], unique=False

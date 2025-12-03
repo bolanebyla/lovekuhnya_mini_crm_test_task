@@ -6,7 +6,7 @@ from mini_crm.application.organizations.enums import OrganizationMemberRoles
 
 @dataclass(kw_only=True)
 class OrganizationMember:
-    """Член организации"""
+    """Участник организации"""
 
     id: EntityId
     organization_id: EntityId

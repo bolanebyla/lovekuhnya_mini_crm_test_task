@@ -6,7 +6,7 @@ from mini_crm.application.organizations.dtos import OrganizationMemberDto
 
 
 class OrganizationMembersReadRepo(Protocol):
-    """Репозитория для чтения членов организации"""
+    """Репозитория для чтения участников организации"""
 
     @abstractmethod
     async def get_by_organization_and_user_id(
