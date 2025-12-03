@@ -4,7 +4,7 @@ from mini_crm.application.organizations.dtos import UserOrganisationDto
 from mini_crm.application.organizations.interfaces import OrganizationsReadRepo
 
 
-class GetUserOrganisations:
+class GetUserOrganisationsUseCase:
     """Возвращает список организаций, в которых состоит текущий пользователь"""
 
     def __init__(

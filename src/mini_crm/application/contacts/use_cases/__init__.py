@@ -1,0 +1,1 @@
+from .get_contacts_by_criteria import GetContactsByCriteriaUseCase

@@ -1,1 +1,2 @@
+from .contacts import ContactShortSchema, GetContactsByCriteriaSchema
 from .organizations import UserOrganisationSchema

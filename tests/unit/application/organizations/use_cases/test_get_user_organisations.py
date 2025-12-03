@@ -3,15 +3,15 @@ import pytest
 from commons.operations import AsyncOperation
 from mini_crm.application.organizations.dtos import UserOrganisationDto
 from mini_crm.application.organizations.interfaces import OrganizationsReadRepo
-from mini_crm.application.organizations.use_cases import GetUserOrganisations
+from mini_crm.application.organizations.use_cases import GetUserOrganisationsUseCase
 
 
 @pytest.fixture(scope="function")
 def use_case(
     operation: AsyncOperation,
     organizations_read_repo: OrganizationsReadRepo,
-) -> GetUserOrganisations:
-    return GetUserOrganisations(
+) -> GetUserOrganisationsUseCase:
+    return GetUserOrganisationsUseCase(
         operation=operation,
         organizations_read_repo=organizations_read_repo,
     )
@@ -19,7 +19,7 @@ def use_case(
 
 @pytest.mark.asyncio
 async def test__get_user_organisations__list(
-    use_case: GetUserOrganisations,
+    use_case: GetUserOrganisationsUseCase,
     organizations_read_repo: OrganizationsReadRepo,
 ) -> None:
     expected = [
@@ -43,7 +43,7 @@ async def test__get_user_organisations__list(
 
 @pytest.mark.asyncio
 async def test__get_user_organisations__empty(
-    use_case: GetUserOrganisations,
+    use_case: GetUserOrganisationsUseCase,
     organizations_read_repo: OrganizationsReadRepo,
 ) -> None:
     organizations_read_repo.get_list_by_member_user_id.return_value = []  # type: ignore[attr-defined]

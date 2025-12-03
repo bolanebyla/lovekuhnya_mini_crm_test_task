@@ -1,1 +1,2 @@
+from .contacts_read_repo import ContactsReadRepoImpl
 from .organizations_read_repo import OrganizationsReadRepoImpl

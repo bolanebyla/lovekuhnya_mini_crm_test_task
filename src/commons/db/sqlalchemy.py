@@ -1,9 +1,13 @@
 from contextlib import AbstractAsyncContextManager
 from contextvars import ContextVar
+from math import ceil
 from types import TracebackType
 from typing import Any
 
+from sqlalchemy import Select, func, select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+
+from commons.dtos.pagination import PaginatedRequestDto
 
 
 class BaseTransactionContextException(Exception):
@@ -98,6 +102,32 @@ class AsyncTransactionContext(AsyncReadOnlyTransactionContext):
         return False
 
 
+class QueryBuilder:
+    """Утилитарный класс для построения запросов"""
+
+    @staticmethod
+    def add_pagination(
+        query: Select[Any],
+        paginated_request: PaginatedRequestDto,
+    ) -> Select[Any]:
+        """Добавляет условия пагинации"""
+
+        offset = (paginated_request.page - 1) * paginated_request.page_size
+
+        query = query.limit(paginated_request.page_size)
+        query = query.offset(offset)
+
+        return query
+
+    @staticmethod
+    def create_total_items_query_for_table(
+        query: Select[Any],
+    ) -> Select[tuple[int]]:
+        """Создаёт запрос на подсчёт количества записй по запросу"""
+        count_query = select(func.count()).select_from(query.subquery())
+        return count_query
+
+
 class BaseReadOnlyRepository:
     """
     Базовый класс репозитория только для чтения
@@ -105,10 +135,24 @@ class BaseReadOnlyRepository:
 
     def __init__(self, transaction_context: AsyncReadOnlyTransactionContext):
         self._transaction_context = transaction_context
+        self.query_builder = QueryBuilder()
 
     @property
     def session(self) -> AsyncSession:
         return self._transaction_context.current_session
+
+    async def get_total_items(
+        self,
+        query: Select[Any],
+    ) -> int:
+        """Получает количество записей в таблице по условиям"""
+
+        count_query = self.query_builder.create_total_items_query_for_table(query=query)
+        total = (await self.session.execute(count_query)).scalar_one()
+        return total
+
+    def get_pages_count(self, total: int, page_size: int) -> int:
+        return ceil(total / page_size) if total else 1
 
 
 class BaseRepository(BaseReadOnlyRepository):

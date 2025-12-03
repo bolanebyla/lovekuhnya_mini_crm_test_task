@@ -1,0 +1,39 @@
+from typing import Annotated
+
+from dishka import FromDishka
+from dishka.integrations.fastapi import DishkaRoute
+from fastapi import APIRouter, Depends, Query
+
+from commons.http_api.schemas import PageSchema
+from mini_crm.application.contacts.use_cases import GetContactsByCriteriaUseCase
+from mini_crm.infrastructure.http_api.auth import CurrentUser, get_current_user
+from mini_crm.infrastructure.http_api.v1.schemas import (
+    ContactShortSchema,
+    GetContactsByCriteriaSchema,
+)
+
+contacts_v1_router = APIRouter(
+    prefix="/contacts",
+    route_class=DishkaRoute,
+    tags=["Контакты"],
+)
+
+
+@contacts_v1_router.get("/")
+async def get_list_by_criteria(
+    criteria_schema: Annotated[GetContactsByCriteriaSchema, Query()],
+    use_case: FromDishka[GetContactsByCriteriaUseCase],
+    current_user: Annotated[CurrentUser, Depends(get_current_user)],
+) -> PageSchema[ContactShortSchema]:
+    """Возвращает список контактов по критериям"""
+    criteria = criteria_schema.to_dto(current_user=current_user)
+
+    result = await use_case.execute(criteria=criteria)
+
+    return PageSchema(
+        items=[ContactShortSchema.from_dto(dto=dto) for dto in result.items],
+        page=result.page,
+        page_size=result.page_size,
+        total=result.total,
+        pages=result.pages,
+    )
