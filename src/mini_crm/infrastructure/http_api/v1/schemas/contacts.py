@@ -1,7 +1,11 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, EmailStr, Field
 
 from commons.http_api.schemas import PaginatedRequestSchema
-from mini_crm.application.contacts.dtos import ContactShortDto, GetContactsByCriteriaDto
+from mini_crm.application.contacts.dtos import (
+    ContactShortDto,
+    CreateContactDto,
+    GetContactsByCriteriaDto,
+)
 from mini_crm.application.organizations.dtos import OrganizationMemberDto
 
 
@@ -39,4 +43,19 @@ class ContactShortSchema(BaseModel):
             name=dto.name,
             email=dto.email,
             phone=dto.phone,
+        )
+
+
+class CreateContactSchema(BaseModel):
+    """Схема создания контакта"""
+
+    name: str
+    email: EmailStr
+    phone: str
+
+    def to_dto(self) -> CreateContactDto:
+        return CreateContactDto(
+            name=self.name,
+            email=str(self.email),
+            phone=self.phone,
         )

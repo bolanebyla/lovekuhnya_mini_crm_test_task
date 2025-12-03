@@ -1,1 +1,2 @@
+from .create_contact import CreateContactUseCase
 from .get_contacts_by_criteria import GetContactsByCriteriaUseCase

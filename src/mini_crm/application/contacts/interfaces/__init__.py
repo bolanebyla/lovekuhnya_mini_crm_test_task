@@ -1,1 +1,1 @@
-from .repositories import ContactsReadRepo
+from .repositories import ContactsReadRepo, ContactsRepo

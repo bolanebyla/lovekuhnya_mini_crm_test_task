@@ -8,7 +8,7 @@ from commons.entities import EntityId
 class Contact:
     """Контакт"""
 
-    id: EntityId
+    id: EntityId | None = None
     created_at: datetime
     organization_id: EntityId
     owner_id: EntityId

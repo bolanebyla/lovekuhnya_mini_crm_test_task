@@ -24,3 +24,12 @@ class ContactShortDto:
     name: str
     email: str
     phone: str
+
+
+@dataclass(kw_only=True)
+class CreateContactDto:
+    """Dto создания контакта"""
+
+    name: str
+    email: str
+    phone: str
