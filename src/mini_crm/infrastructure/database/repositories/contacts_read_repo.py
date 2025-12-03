@@ -13,7 +13,7 @@ class ContactsReadRepoImpl(BaseReadOnlyRepository, ContactsReadRepo):
         criteria: GetContactsByCriteriaDto,
     ) -> Page[ContactShortDto]:
         filters = [
-            contacts_table.c.organization_id == criteria.organization_id,
+            contacts_table.c.organization_id == criteria.current_user.organization_id,
         ]
 
         if criteria.owner_id:

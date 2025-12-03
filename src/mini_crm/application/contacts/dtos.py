@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from commons.dtos.pagination import PaginatedRequestDto
 from commons.entities import EntityId
+from mini_crm.application.organizations.dtos import OrganizationMemberDto
 
 
 @dataclass(kw_only=True)
@@ -12,9 +13,7 @@ class GetContactsByCriteriaDto(PaginatedRequestDto):
     owner_id: EntityId | None = None
     """Id пользователя владельца контакта"""
 
-    organization_id: EntityId
-    current_user_id: EntityId
-    """Id текущего пользователя"""
+    current_user: OrganizationMemberDto
 
 
 @dataclass(kw_only=True)

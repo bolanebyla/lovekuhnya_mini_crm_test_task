@@ -42,3 +42,14 @@ class AppError(Exception):
 
     def __str__(self) -> str:
         return self.message
+
+
+class ForbiddenError(AppError):
+    code = "forbidden"
+
+
+class ForbiddenUserActionError(ForbiddenError):
+    message_template = (
+        'У пользователя с id "{user_id}" ролью "{role}" нет прав для выполнения действия: {action}'
+    )
+    code = "forbidden_user_action"

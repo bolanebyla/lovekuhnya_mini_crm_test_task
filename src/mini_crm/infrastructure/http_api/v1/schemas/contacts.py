@@ -20,8 +20,7 @@ class GetContactsByCriteriaSchema(PaginatedRequestSchema):
             page_size=self.page_size,
             search=self.search,
             owner_id=self.owner_id,
-            organization_id=current_user.organization_id,
-            current_user_id=current_user.user_id,
+            current_user=current_user,
         )
 
 
