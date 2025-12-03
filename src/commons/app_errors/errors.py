@@ -53,3 +53,12 @@ class ForbiddenUserActionError(ForbiddenError):
         'У пользователя с id "{user_id}" ролью "{role}" нет прав для выполнения действия: {action}'
     )
     code = "forbidden_user_action"
+
+
+class NotFoundError(AppError):
+    code = "not_found"
+
+
+class EntityNotFoundByIdError(NotFoundError):
+    message_template = 'Сущность "{entity}" не найдена по id "{id_}"'
+    code = "not_found_by_id"

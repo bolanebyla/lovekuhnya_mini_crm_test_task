@@ -2,7 +2,7 @@ from fastapi import Request
 from starlette.responses import JSONResponse, Response
 
 from commons.app_errors import AppError
-from commons.app_errors.errors import ForbiddenError
+from commons.app_errors.errors import ForbiddenError, NotFoundError
 
 
 def app_error_handler(request: Request, exc: Exception) -> Response:
@@ -14,6 +14,14 @@ def app_error_handler(request: Request, exc: Exception) -> Response:
             status_code=403,
             content={
                 "detail": exc.message if exc.message else "Forbidden",
+                "code": exc.code,
+            },
+        )
+    elif isinstance(exc, NotFoundError):
+        return JSONResponse(
+            status_code=404,
+            content={
+                "detail": exc.message if exc.message else "Not found",
                 "code": exc.code,
             },
         )

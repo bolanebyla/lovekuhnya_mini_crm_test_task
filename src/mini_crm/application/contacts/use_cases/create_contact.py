@@ -7,7 +7,7 @@ from mini_crm.application.organizations.dtos import OrganizationMemberDto
 
 
 class CreateContactUseCase:
-    """Создаёт контакт"""
+    """Создать контакт"""
 
     def __init__(
         self,

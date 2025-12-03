@@ -1,0 +1,74 @@
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, Numeric, String, Table, func
+
+from mini_crm.infrastructure.database.meta import metadata
+
+deals_table = Table(
+    "deals",
+    metadata,
+    Column(
+        "id",
+        Integer,
+        primary_key=True,
+        autoincrement=True,
+    ),
+    Column(
+        "organization_id",
+        Integer,
+        ForeignKey("organizations.id"),
+        index=True,
+    ),
+    Column(
+        "contact_id",
+        Integer,
+        ForeignKey("contacts.id"),
+        index=True,
+    ),
+    Column(
+        "owner_id",
+        Integer,
+        ForeignKey("users.id"),
+        index=True,
+    ),
+    Column(
+        "title",
+        String,
+        nullable=False,
+    ),
+    Column(
+        "amount",
+        Numeric(20, 2),
+        nullable=False,
+        index=True,
+    ),
+    Column(
+        "currency",
+        String,
+        nullable=False,
+    ),
+    Column(
+        "status",
+        String,
+        nullable=False,
+        index=True,
+    ),
+    Column(
+        "stage",
+        String,
+        nullable=False,
+        index=True,
+    ),
+    Column(
+        "created_at",
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+        index=True,
+    ),
+    Column(
+        "updated_at",
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+    ),
+    comment="Сделки",
+)
