@@ -25,10 +25,11 @@ class SupportsStr(Protocol):
 class AppError(Exception):
     code: str | None = None
     message_template: str | None = None
+    context: dict[str, SupportsStr]
 
     def __init__(self, **kwargs: SupportsStr):
         if "message" in kwargs:
-            self.message = str(kwargs["message"])
+            self.message = str(kwargs.pop("message"))
         elif self.message_template:
             self.message = self.message_template.format(**kwargs)
         else:
@@ -36,6 +37,8 @@ class AppError(Exception):
 
         if self.code is None:
             self.code = camel_case_to_dash(self.__class__.__name__)
+
+        self.context = kwargs
 
     def __str__(self) -> str:
         return self.message

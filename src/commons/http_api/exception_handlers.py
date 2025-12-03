@@ -14,6 +14,7 @@ def app_error_handler(request: Request, exc: Exception) -> Response:
             content={
                 "message": exc.message,
                 "code": exc.code,
+                "context": exc.context,
             },
         )
 

@@ -4,9 +4,10 @@ from dishka import FromDishka
 from dishka.integrations.fastapi import DishkaRoute
 from fastapi import APIRouter, Depends
 
-from mini_crm.application.organizations.use_cases import GetUserOrganisationsUseCase
-from mini_crm.infrastructure.http_api.auth import CurrentUser, get_current_user
-from mini_crm.infrastructure.http_api.v1.schemas import UserOrganisationSchema
+from mini_crm.application.organizations.dtos import OrganizationMemberDto
+from mini_crm.application.organizations.use_cases import GetUserOrganizationsUseCase
+from mini_crm.infrastructure.http_api.auth import get_current_user
+from mini_crm.infrastructure.http_api.v1.schemas import UserOrganizationSchema
 
 organizations_v1_router = APIRouter(
     prefix="/organizations",
@@ -17,10 +18,10 @@ organizations_v1_router = APIRouter(
 
 @organizations_v1_router.get("/me")
 async def me(
-    use_case: FromDishka[GetUserOrganisationsUseCase],
-    current_user: Annotated[CurrentUser, Depends(get_current_user)],
-) -> list[UserOrganisationSchema]:
+    use_case: FromDishka[GetUserOrganizationsUseCase],
+    current_user: Annotated[OrganizationMemberDto, Depends(get_current_user)],
+) -> list[UserOrganizationSchema]:
     """Возвращает список организаций, в которых состоит текущий пользователь"""
     result = await use_case.execute(user_id=current_user.user_id)
 
-    return [UserOrganisationSchema.from_dto(dto=dto) for dto in result]
+    return [UserOrganizationSchema.from_dto(dto=dto) for dto in result]

@@ -1,1 +1,2 @@
+from .organization_members_read_repo import OrganizationMembersReadRepo
 from .organizations_read_repo import OrganizationsReadRepo

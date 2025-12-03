@@ -6,7 +6,8 @@ from fastapi import APIRouter, Depends, Query
 
 from commons.http_api.schemas import PageSchema
 from mini_crm.application.contacts.use_cases import GetContactsByCriteriaUseCase
-from mini_crm.infrastructure.http_api.auth import CurrentUser, get_current_user
+from mini_crm.application.organizations.dtos import OrganizationMemberDto
+from mini_crm.infrastructure.http_api.auth import get_current_user
 from mini_crm.infrastructure.http_api.v1.schemas import (
     ContactShortSchema,
     GetContactsByCriteriaSchema,
@@ -23,7 +24,7 @@ contacts_v1_router = APIRouter(
 async def get_list_by_criteria(
     criteria_schema: Annotated[GetContactsByCriteriaSchema, Query()],
     use_case: FromDishka[GetContactsByCriteriaUseCase],
-    current_user: Annotated[CurrentUser, Depends(get_current_user)],
+    current_user: Annotated[OrganizationMemberDto, Depends(get_current_user)],
 ) -> PageSchema[ContactShortSchema]:
     """Возвращает список контактов по критериям"""
     criteria = criteria_schema.to_dto(current_user=current_user)

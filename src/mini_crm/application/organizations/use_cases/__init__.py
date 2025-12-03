@@ -1,1 +1,2 @@
-from .get_user_organisations import GetUserOrganisationsUseCase
+from .get_organization_member_by_user import GetOrganizationMemberByUserUseCase
+from .get_user_organizations import GetUserOrganizationsUseCase

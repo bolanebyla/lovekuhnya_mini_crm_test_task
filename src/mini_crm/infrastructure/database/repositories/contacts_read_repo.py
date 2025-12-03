@@ -8,13 +8,10 @@ from mini_crm.infrastructure.database.tables import contacts_table
 
 
 class ContactsReadRepoImpl(BaseReadOnlyRepository, ContactsReadRepo):
-    """Репозитория для чтения контактов"""
-
     async def get_page_by_criteria(
         self,
         criteria: GetContactsByCriteriaDto,
     ) -> Page[ContactShortDto]:
-        """Получает список контактов по критериям"""
         filters = [
             contacts_table.c.organization_id == criteria.organization_id,
         ]

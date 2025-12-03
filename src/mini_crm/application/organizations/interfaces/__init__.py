@@ -1,1 +1,1 @@
-from .repositories import OrganizationsReadRepo
+from .repositories import OrganizationMembersReadRepo, OrganizationsReadRepo

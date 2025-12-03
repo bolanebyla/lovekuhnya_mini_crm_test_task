@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 
 from commons.http_api.schemas import PaginatedRequestSchema
 from mini_crm.application.contacts.dtos import ContactShortDto, GetContactsByCriteriaDto
-from mini_crm.infrastructure.http_api.auth import CurrentUser
+from mini_crm.application.organizations.dtos import OrganizationMemberDto
 
 
 class GetContactsByCriteriaSchema(PaginatedRequestSchema):
@@ -14,7 +14,7 @@ class GetContactsByCriteriaSchema(PaginatedRequestSchema):
     search: str | None = Field(None, description="Поиск по name/email")
     owner_id: int | None = Field(None, description="Id пользователя владельца контакта")
 
-    def to_dto(self, current_user: CurrentUser) -> GetContactsByCriteriaDto:
+    def to_dto(self, current_user: OrganizationMemberDto) -> GetContactsByCriteriaDto:
         return GetContactsByCriteriaDto(
             page=self.page,
             page_size=self.page_size,

@@ -1,10 +1,10 @@
 from commons.entities import EntityId
 from commons.operations import AsyncOperation, async_operation
-from mini_crm.application.organizations.dtos import UserOrganisationDto
+from mini_crm.application.organizations.dtos import UserOrganizationDto
 from mini_crm.application.organizations.interfaces import OrganizationsReadRepo
 
 
-class GetUserOrganisationsUseCase:
+class GetUserOrganizationsUseCase:
     """Возвращает список организаций, в которых состоит текущий пользователь"""
 
     def __init__(
@@ -19,8 +19,8 @@ class GetUserOrganisationsUseCase:
     async def execute(
         self,
         user_id: EntityId,
-    ) -> list[UserOrganisationDto]:
-        user_organisations = await self._organizations_read_repo.get_list_by_member_user_id(
+    ) -> list[UserOrganizationDto]:
+        user_organizations = await self._organizations_read_repo.get_list_by_member_user_id(
             user_id=user_id
         )
-        return user_organisations
+        return user_organizations
