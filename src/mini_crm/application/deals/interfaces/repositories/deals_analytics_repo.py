@@ -4,7 +4,7 @@ from decimal import Decimal
 from typing import Protocol
 
 from commons.entities import EntityId
-from mini_crm.application.deals.dtos import DealStatusSummaryDto
+from mini_crm.application.deals.dtos import DealStageFunnelItemDto, DealStatusSummaryDto
 
 
 class DealsAnalyticsRepo(Protocol):
@@ -33,4 +33,12 @@ class DealsAnalyticsRepo(Protocol):
         since: datetime,
     ) -> int:
         """Получает количество новых сделок с указанной даты"""
+        ...
+
+    @abstractmethod
+    async def get_funnel_by_stage_and_status(
+        self,
+        organization_id: EntityId,
+    ) -> list[DealStageFunnelItemDto]:
+        """Получает количество сделок по стадиям в разрезе статусов"""
         ...

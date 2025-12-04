@@ -5,8 +5,8 @@ from sqlalchemy import func, select
 
 from commons.db.sqlalchemy import BaseReadOnlyRepository
 from commons.entities import EntityId
-from mini_crm.application.deals.dtos import DealStatusSummaryDto
-from mini_crm.application.deals.enums import DealStatuses
+from mini_crm.application.deals.dtos import DealStageFunnelItemDto, DealStatusSummaryDto
+from mini_crm.application.deals.enums import DealStages, DealStatuses
 from mini_crm.application.deals.interfaces import DealsAnalyticsRepo
 from mini_crm.infrastructure.database.tables import deals_table
 
@@ -68,3 +68,29 @@ class DealsAnalyticsRepoImpl(BaseReadOnlyRepository, DealsAnalyticsRepo):
 
         result = await self.session.execute(query)
         return result.scalar_one()
+
+    async def get_funnel_by_stage_and_status(
+        self,
+        organization_id: EntityId,
+    ) -> list[DealStageFunnelItemDto]:
+        query = (
+            select(
+                deals_table.c.stage,
+                deals_table.c.status,
+                func.count().label("count"),
+            )
+            .where(deals_table.c.organization_id == organization_id)
+            .group_by(deals_table.c.stage, deals_table.c.status)
+        )
+
+        result = await self.session.execute(query)
+        rows = result.mappings().all()
+
+        return [
+            DealStageFunnelItemDto(
+                stage=DealStages(row.stage),
+                status=DealStatuses(row.status),
+                count=row.count,
+            )
+            for row in rows
+        ]

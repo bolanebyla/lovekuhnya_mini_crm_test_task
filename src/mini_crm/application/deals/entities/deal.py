@@ -16,7 +16,7 @@ DEAL_STAGES_ORDER = (
     DealStages.NEGOTIATION,
     DealStages.CLOSED,
 )
-"""Порядок изменения этапов сделки"""
+"""Порядок этапов сделки"""
 
 
 @dataclass(kw_only=True)
