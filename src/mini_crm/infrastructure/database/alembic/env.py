@@ -92,7 +92,8 @@ def do_run_migrations(connection: Connection) -> None:
     )
 
     with context.begin_transaction():
-        context.execute(f"CREATE SCHEMA IF NOT EXISTS {target_metadata.schema}")
+        if target_metadata.schema is not None:
+            context.execute(f"CREATE SCHEMA IF NOT EXISTS {target_metadata.schema}")
         context.run_migrations()
 
 
