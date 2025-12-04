@@ -6,13 +6,24 @@ from fastapi import APIRouter, Body, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 
 from commons.http_api.auth import AuthTokensResponse, JwtManager
-from mini_crm.infrastructure.http_api.v1.schemas import LoginSchema
+from mini_crm.application.users.use_cases import RegisterUserByEmailUseCase
+from mini_crm.infrastructure.http_api.v1.schemas import LoginSchema, RegisterUserSchema
 
 auth_v1_router = APIRouter(
     prefix="/auth",
     route_class=DishkaRoute,
     tags=["Auth"],
 )
+
+
+@auth_v1_router.post("/register")
+async def register(
+    register_schema: Annotated[RegisterUserSchema, Body()],
+    use_case: FromDishka[RegisterUserByEmailUseCase],
+) -> None:
+    """Регистрация пользователя и первой организации"""
+    dto = register_schema.to_dto()
+    await use_case.execute(dto=dto)
 
 
 @auth_v1_router.post("/oauth2_login")
@@ -33,7 +44,7 @@ async def login(
     jwt_manager: FromDishka[JwtManager],
 ) -> AuthTokensResponse:
     """
-    Вход по email и парою
+    Вход по email и паролю
     """
     # TODO: получать пользователя по email и паролю
     jwt_tokens = jwt_manager.create_auth_tokens(

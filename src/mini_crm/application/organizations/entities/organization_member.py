@@ -8,7 +8,7 @@ from mini_crm.application.organizations.enums import OrganizationMemberRoles
 class OrganizationMember:
     """Участник организации"""
 
-    id: EntityId
+    id: EntityId | None = None
     organization_id: EntityId
     user_id: EntityId
     role: OrganizationMemberRoles

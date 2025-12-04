@@ -5,9 +5,11 @@ from commons.entities import EntityId
 
 
 @dataclass(kw_only=True)
-class Organization:
-    """Организация"""
+class User:
+    """Пользователь"""
 
     id: EntityId | None = None
+    email: str
+    hashed_password: str
     name: str
     created_at: datetime

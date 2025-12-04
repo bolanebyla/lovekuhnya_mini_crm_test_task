@@ -4,6 +4,9 @@ from .contacts_read_repo import ContactsReadRepoImpl
 from .contacts_repo import ContactsRepoImpl
 from .deals_repo import DealsRepoImpl
 from .organization_members_read_repo import OrganizationMembersReadRepoImpl
+from .organization_members_repo import OrganizationMembersRepoImpl
 from .organizations_read_repo import OrganizationsReadRepoImpl
+from .organizations_repo import OrganizationsRepoImpl
 from .tasks_read_repo import TasksReadRepoImpl
 from .tasks_repo import TasksRepoImpl
+from .users_repo import UsersRepoImpl

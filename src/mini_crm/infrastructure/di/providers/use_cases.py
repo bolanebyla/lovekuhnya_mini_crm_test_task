@@ -15,6 +15,7 @@ from mini_crm.application.organizations.use_cases import (
     GetUserOrganizationsUseCase,
 )
 from mini_crm.application.tasks.use_cases import CreateTaskUseCase, GetTasksByCriteriaUseCase
+from mini_crm.application.users.use_cases import RegisterUserByEmailUseCase
 
 
 class UseCasesProvider(Provider):
@@ -30,3 +31,4 @@ class UseCasesProvider(Provider):
     create_task = provide(CreateTaskUseCase)
     get_activities_by_deal = provide(GetActivitiesByDealUseCase)
     create_manual_deal_activity = provide(CreateManualDealActivityUseCase)
+    register_user_by_email = provide(RegisterUserByEmailUseCase)

@@ -1,11 +1,15 @@
 from dishka import Provider, Scope, provide
 
 from commons.http_api.auth import JwtManager
+from mini_crm.application.users.interfaces import PasswordHasher
 from mini_crm.infrastructure.http_api import ApiSecuritySettings
+from mini_crm.infrastructure.http_api.password_hasher import BcryptPasswordHasher
 
 
 class AuthProvider(Provider):
     scope = Scope.APP
+
+    password_hasher = provide(BcryptPasswordHasher, provides=PasswordHasher)
 
     @provide
     def create_jwt_manager(
