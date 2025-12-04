@@ -132,13 +132,13 @@ docker build -t lovekuhnya_mini_crm_test_task .
 Применение миграций
 
 ```shell
-docker run mini_crm:latest entrypoint_migrations.sh
+docker run lovekuhnya_mini_crm_test_task:latest entrypoint_migrations.sh
 ```
 
 Запуск http api
 
 ```shell
-docker run -p 8080:8080 mini_crm:latest entrypoint_http_api.sh
+docker run -p 8080:8080 lovekuhnya_mini_crm_test_task:latest entrypoint_http_api.sh
 ```
 
 ## 🧪 Тестирование

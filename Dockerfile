@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY pyproject.toml uv.lock README.md ./
 
+COPY src ./src
+
 RUN uv pip install --system . \
   && apt-get purge -y build-essential \
   && rm -rf /var/lib/apt/lists/*
