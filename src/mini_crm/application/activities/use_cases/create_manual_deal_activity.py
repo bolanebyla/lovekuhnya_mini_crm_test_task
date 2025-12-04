@@ -1,11 +1,9 @@
-from commons.datetime_utils import now_tz
 from commons.entities import EntityId
 from commons.operations import AsyncOperation, async_operation
 from mini_crm.application.activities.dtos import CreateActivityDto
-from mini_crm.application.activities.entities import Activity
 from mini_crm.application.activities.enums import ActivityTypes
 from mini_crm.application.activities.errors import OnlyCommentActivityTypeAllowedError
-from mini_crm.application.activities.interfaces import ActivitiesRepo
+from mini_crm.application.activities.services import ActivitiesService
 from mini_crm.application.deals.services import DealsService
 from mini_crm.application.organizations.dtos import OrganizationMemberDto
 
@@ -16,11 +14,11 @@ class CreateManualDealActivityUseCase:
     def __init__(
         self,
         operation: AsyncOperation,
-        activities_repo: ActivitiesRepo,
+        activities_service: ActivitiesService,
         deals_service: DealsService,
     ):
         self._operation = operation
-        self._activities_repo = activities_repo
+        self._activities_service = activities_service
         self._deals_service = deals_service
 
     @async_operation
@@ -38,12 +36,9 @@ class CreateManualDealActivityUseCase:
             current_user=current_user,
         )
 
-        activity = Activity(
+        await self._activities_service.create_activity(
             deal_id=deal_id,
-            author_id=current_user.user_id,
-            type=create_dto.type,
+            type_=create_dto.type,
             payload=create_dto.payload,
-            created_at=now_tz(),
+            author_id=current_user.user_id,
         )
-
-        await self._activities_repo.add(activity=activity)

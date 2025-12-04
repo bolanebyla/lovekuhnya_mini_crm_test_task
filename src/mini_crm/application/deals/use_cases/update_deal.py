@@ -1,4 +1,8 @@
+from typing import cast
+
+from commons.entities import EntityId
 from commons.operations import AsyncOperation, async_operation
+from mini_crm.application.activities.services import ActivitiesService
 from mini_crm.application.deals.dtos import UpdateDealDto
 from mini_crm.application.deals.interfaces import DealsRepo
 from mini_crm.application.deals.services import DealsService
@@ -19,10 +23,12 @@ class UpdateDealUseCase:
         operation: AsyncOperation,
         deals_repo: DealsRepo,
         deals_service: DealsService,
+        activities_service: ActivitiesService,
     ):
         self._operation = operation
         self._deals_repo = deals_repo
         self._deals_service = deals_service
+        self._activities_service = activities_service
 
     @async_operation
     async def execute(
@@ -35,6 +41,9 @@ class UpdateDealUseCase:
             current_user=current_user,
         )
 
+        old_status = deal.status
+        old_stage = deal.stage
+
         deal.set_status(status=update_dto.status)
 
         skip_stage_order_validation = (
@@ -45,6 +54,19 @@ class UpdateDealUseCase:
             skip_order_validation=skip_stage_order_validation,
         )
 
-        # TODO: создавать Activity
-
         await self._deals_repo.add(deal=deal)
+
+        # Создаём активности при изменении статуса/стадии
+        if old_status != deal.status:
+            await self._activities_service.create_status_changed_activity(
+                deal_id=cast(EntityId, deal.id),
+                old_status=old_status,
+                new_status=deal.status,
+            )
+
+        if old_stage != deal.stage:
+            await self._activities_service.create_stage_changed_activity(
+                deal_id=cast(EntityId, deal.id),
+                old_stage=old_stage,
+                new_stage=deal.stage,
+            )

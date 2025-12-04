@@ -12,8 +12,8 @@ class Activity:
 
     id: EntityId | None = None
     deal_id: EntityId
-    author_id: EntityId | None
-    """ID автора (User), может быть null для системных событий"""
+    author_id: EntityId | None = None
+    """Id автора (User), может быть null для системных событий"""
     type: ActivityTypes
     payload: dict[str, Any]
     """Произвольные детали активности в формате JSON"""
