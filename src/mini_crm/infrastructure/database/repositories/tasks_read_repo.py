@@ -37,7 +37,7 @@ class TasksReadRepoImpl(BaseReadOnlyRepository, TasksReadRepo):
                 tasks_table.c.is_done,
                 tasks_table.c.created_at,
             )
-            .select_from(tasks_table.join(deals_table, tasks_table.c.deal_id == deals_table.c.id))
+            .join(deals_table)
             .where(*filters)
         )
 

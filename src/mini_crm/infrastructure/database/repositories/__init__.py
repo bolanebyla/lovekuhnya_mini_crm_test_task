@@ -1,3 +1,4 @@
+from .activities_read_repo import ActivitiesReadRepoImpl
 from .activities_repo import ActivitiesRepoImpl
 from .contacts_read_repo import ContactsReadRepoImpl
 from .contacts_repo import ContactsRepoImpl

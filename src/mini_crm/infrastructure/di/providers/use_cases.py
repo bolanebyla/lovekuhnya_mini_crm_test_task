@@ -1,5 +1,6 @@
 from dishka import Provider, Scope, provide
 
+from mini_crm.application.activities.use_cases import GetActivitiesByDealUseCase
 from mini_crm.application.contacts.use_cases import (
     CreateContactUseCase,
     GetContactsByCriteriaUseCase,
@@ -24,3 +25,4 @@ class UseCasesProvider(Provider):
     update_deal = provide(UpdateDealUseCase)
     get_tasks_by_criteria = provide(GetTasksByCriteriaUseCase)
     create_task = provide(CreateTaskUseCase)
+    get_activities_by_deal = provide(GetActivitiesByDealUseCase)

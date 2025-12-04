@@ -1,1 +1,1 @@
-from .repositories import ActivitiesRepo
+from .repositories import ActivitiesReadRepo, ActivitiesRepo

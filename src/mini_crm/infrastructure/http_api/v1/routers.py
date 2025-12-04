@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from mini_crm.infrastructure.http_api.v1.controllers import (
+    activities_v1_router,
     auth_v1_router,
     contacts_v1_router,
     deals_v1_router,
@@ -15,3 +16,4 @@ v1_router.include_router(organizations_v1_router)
 v1_router.include_router(contacts_v1_router)
 v1_router.include_router(deals_v1_router)
 v1_router.include_router(tasks_v1_router)
+v1_router.include_router(activities_v1_router)
