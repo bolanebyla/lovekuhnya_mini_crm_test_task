@@ -19,6 +19,7 @@ dependencies = [
     "tzdata==2025.2",
     "uvicorn[standard]==0.38.0",
     "bcrypt==5.0.0",
+    "cashews==7.4.3",
 ]
 
 [dependency-groups]

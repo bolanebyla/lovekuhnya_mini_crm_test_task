@@ -12,6 +12,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from commons.app_errors import AppError
 from commons.http_api.exception_handlers import app_error_handler, validation_exception_handler
+from mini_crm.infrastructure.cache import CacheSettings, setup_cash
 from mini_crm.infrastructure.http_api import (
     HttpApiPrometheusMetricsSettings,
     HttpApiSettings,
@@ -44,6 +45,7 @@ def create_app(
     api_settings: HttpApiSettings,
     container: AsyncContainer,
     api_prometheus_metrics_settings: HttpApiPrometheusMetricsSettings,
+    cache_settings: CacheSettings,
 ) -> FastAPI:
     """
     Создаёт инстанс fast api
@@ -77,6 +79,8 @@ def create_app(
         app=app,
         settings=api_prometheus_metrics_settings,
     )
+
+    setup_cash(cache_settings=cache_settings)
 
     setup_dishka(container=container, app=app)
 

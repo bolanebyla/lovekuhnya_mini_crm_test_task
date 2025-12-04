@@ -154,6 +154,15 @@ wheels = [
 ]
 
 [[package]]
+name = "cashews"
+version = "7.4.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/d9/e7b3daee814680e9a4a02835beb8c13b489a4422e902a7f39371c811ed2b/cashews-7.4.3.tar.gz", hash = "sha256:72cc1931b558e1bbe1e80395f9be6707131ffe21768f55e359d3e760c802fbb1", size = 92426, upload-time = "2025-10-11T21:08:41.761Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c5/6b/40059c0d5fe32b6434aae14b55afe6a7e6d158826582a5a44101bb5daaed/cashews-7.4.3-py3-none-any.whl", hash = "sha256:33449b26b44c36d3ab6e73f91f71ade1e29e918e85a820238f1947beaae26322", size = 79729, upload-time = "2025-10-11T21:08:40.236Z" },
+]
+
+[[package]]
 name = "cffi"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -579,6 +588,7 @@ dependencies = [
     { name = "alembic" },
     { name = "asyncpg" },
     { name = "bcrypt" },
+    { name = "cashews" },
     { name = "coloredlogs" },
     { name = "dishka" },
     { name = "fastapi" },
@@ -609,7 +619,8 @@ dev = [
 requires-dist = [
     { name = "alembic", specifier = "==1.17.2" },
     { name = "asyncpg", specifier = "==0.31.0" },
-    { name = "bcrypt", specifier = ">=5.0.0" },
+    { name = "bcrypt", specifier = "==5.0.0" },
+    { name = "cashews", specifier = ">=7.4.3" },
     { name = "coloredlogs", specifier = "==15.0.1" },
     { name = "dishka", specifier = "==1.7.2" },
     { name = "fastapi", specifier = "==0.123.0" },

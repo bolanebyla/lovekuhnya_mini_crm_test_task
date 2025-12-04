@@ -3,6 +3,7 @@ import logging
 import uvicorn
 
 from mini_crm.infrastructure import log
+from mini_crm.infrastructure.cache import CacheSettings
 from mini_crm.infrastructure.database.settings import DBSettings
 from mini_crm.infrastructure.di import create_http_api_container
 from mini_crm.infrastructure.http_api.app import create_app
@@ -16,6 +17,7 @@ api_settings = HttpApiSettings()
 api_security_settings = ApiSecuritySettings()
 api_prometheus_metrics_settings = HttpApiPrometheusMetricsSettings()
 db_settings = DBSettings()
+cache_settings = CacheSettings()
 
 
 log_config = log.create_config(
@@ -38,6 +40,7 @@ app = create_app(
     api_settings=api_settings,
     container=http_api_container,
     api_prometheus_metrics_settings=api_prometheus_metrics_settings,
+    cache_settings=cache_settings,
 )
 
 if __name__ == "__main__":
