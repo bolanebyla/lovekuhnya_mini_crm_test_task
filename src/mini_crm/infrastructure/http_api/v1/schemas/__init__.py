@@ -1,3 +1,3 @@
 from .contacts import ContactShortSchema, CreateContactSchema, GetContactsByCriteriaSchema
-from .deals import CreateDealSchema
+from .deals import CreateDealSchema, UpdateDealSchema
 from .organizations import UserOrganizationSchema

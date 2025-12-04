@@ -19,6 +19,6 @@ class CreateDealDto:
 class UpdateDealDto:
     """Dto для обновления сделки"""
 
-    id: EntityId
+    deal_id: EntityId
     status: DealStatuses
     stage: DealStages

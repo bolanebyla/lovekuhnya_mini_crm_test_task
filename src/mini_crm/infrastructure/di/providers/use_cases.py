@@ -5,6 +5,7 @@ from mini_crm.application.contacts.use_cases import (
     GetContactsByCriteriaUseCase,
 )
 from mini_crm.application.deals.use_cases import CreateDealUseCase
+from mini_crm.application.deals.use_cases.update_deal import UpdateDealUseCase
 from mini_crm.application.organizations.use_cases import (
     GetOrganizationMemberByUserUseCase,
     GetUserOrganizationsUseCase,
@@ -19,3 +20,4 @@ class UseCasesProvider(Provider):
     get_contacts_by_criteria = provide(GetContactsByCriteriaUseCase)
     create_contact = provide(CreateContactUseCase)
     create_deal = provide(CreateDealUseCase)
+    update_deal = provide(UpdateDealUseCase)

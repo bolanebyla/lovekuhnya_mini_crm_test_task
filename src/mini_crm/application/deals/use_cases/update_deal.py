@@ -29,11 +29,11 @@ class UpdateDealUseCase:
         update_dto: UpdateDealDto,
         current_user: OrganizationMemberDto,
     ) -> None:
-        deal = await self._deals_repo.get_by_id(id_=update_dto.id)
+        deal = await self._deals_repo.get_by_id(id_=update_dto.deal_id)
         if deal is None:
             raise EntityNotFoundByIdError(
                 entity=Deal.__name__,
-                id_=update_dto.id,
+                id_=update_dto.deal_id,
             )
 
         if deal.organization_id != current_user.organization_id:
