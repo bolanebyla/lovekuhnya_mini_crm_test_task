@@ -16,7 +16,6 @@ users_table = Table(
         String,
         nullable=False,
         unique=True,
-        index=True,
     ),
     Column(
         "hashed_password",
@@ -27,7 +26,6 @@ users_table = Table(
         "name",
         String,
         nullable=False,
-        index=True,
     ),
     Column(
         "created_at",

@@ -15,6 +15,7 @@ organizations_table = Table(
         "name",
         String,
         nullable=False,
+        index=True,
     ),
     Column(
         "created_at",

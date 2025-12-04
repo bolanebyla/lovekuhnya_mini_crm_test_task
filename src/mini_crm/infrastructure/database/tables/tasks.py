@@ -4,6 +4,7 @@ from sqlalchemy import (
     Date,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     String,
     Table,
@@ -27,7 +28,6 @@ tasks_table = Table(
         Integer,
         ForeignKey("deals.id"),
         nullable=False,
-        index=True,
     ),
     Column(
         "title",
@@ -44,14 +44,12 @@ tasks_table = Table(
         "due_date",
         Date,
         nullable=False,
-        index=True,
     ),
     Column(
         "is_done",
         Boolean,
         nullable=False,
         default=False,
-        index=True,
     ),
     Column(
         "created_at",
@@ -59,5 +57,7 @@ tasks_table = Table(
         nullable=False,
         server_default=func.now(),
     ),
+    Index("ix_tasks_deal_is_done", "deal_id", "is_done"),
+    Index("ix_tasks_deal_due_date", "deal_id", "due_date"),
     comment="Задачи по сделкам",
 )

@@ -12,22 +12,16 @@ contacts_table = Table(
         autoincrement=True,
     ),
     Column(
-        "created_at",
-        DateTime(timezone=True),
-        nullable=False,
-        server_default=func.now(),
-    ),
-    Column(
         "organization_id",
         Integer,
         ForeignKey("organizations.id"),
+        nullable=False,
         index=True,
     ),
     Column(
         "owner_id",
         Integer,
         ForeignKey("users.id"),
-        index=True,
     ),
     Column(
         "name",
@@ -44,6 +38,13 @@ contacts_table = Table(
         String,
         nullable=False,
     ),
+    Column(
+        "created_at",
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=func.now(),
+    ),
+    Index("ix_contacts_org_owner", "organization_id", "owner_id"),
     Index(
         "ix_contacts_name_trgm",
         "name",
