@@ -1,9 +1,9 @@
 from dishka import Provider, Scope, provide
 
 from commons.http_api.auth import JwtManager
+from commons.http_api.password_hasher import BcryptPasswordHasher
 from mini_crm.application.users.interfaces import PasswordHasher
 from mini_crm.infrastructure.http_api import ApiSecuritySettings
-from mini_crm.infrastructure.http_api.password_hasher import BcryptPasswordHasher
 
 
 class AuthProvider(Provider):
