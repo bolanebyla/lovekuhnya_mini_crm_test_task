@@ -65,7 +65,7 @@ class JwtManager:
 
     def create_auth_tokens(
         self,
-        user_id: int,
+        user_id: int | str,
     ) -> AuthTokensResponse:
         access_token = self.create_access_token(
             user_id=user_id,

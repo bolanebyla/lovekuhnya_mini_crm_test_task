@@ -31,8 +31,8 @@ from mini_crm.application.organizations.use_cases import (
     GetUserOrganizationsUseCase,
 )
 from mini_crm.application.tasks.use_cases import CreateTaskUseCase, GetTasksByCriteriaUseCase
-from mini_crm.application.users.use_cases import RegisterUserByEmailUseCase
-from mini_crm.infrastructure.http_api.auth import get_current_user
+from mini_crm.application.users.use_cases import LoginUserByEmailUseCase, RegisterUserByEmailUseCase
+from mini_crm.infrastructure.http_api.auth import get_current_user, get_current_user_id
 from mini_crm.infrastructure.http_api.v1 import v1_router
 
 
@@ -100,6 +100,10 @@ class MockUseCasesProvider(Provider):
         return self._mocks.get(RegisterUserByEmailUseCase, AsyncMock())
 
     @provide
+    def login_user_by_email(self) -> LoginUserByEmailUseCase:
+        return self._mocks.get(LoginUserByEmailUseCase, AsyncMock())
+
+    @provide
     def jwt_manager(self) -> JwtManager:
         mock = self._mocks.get(JwtManager)
         if mock:
@@ -145,6 +149,11 @@ def app(mock_current_user: OrganizationMemberDto, container: AsyncContainer) -> 
         return mock_current_user
 
     test_app.dependency_overrides[get_current_user] = override_get_current_user
+
+    def override_get_current_user_id() -> int:
+        return 1
+
+    test_app.dependency_overrides[get_current_user_id] = override_get_current_user_id
 
     setup_dishka(container=container, app=test_app)
 

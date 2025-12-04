@@ -37,3 +37,12 @@ async def get_current_user(
         ) from e
 
     return organization_member
+
+
+@inject
+def get_current_user_id(
+    access_token: Annotated[str, Depends(oauth2_scheme)],
+    jwt_manager: FromDishka[JwtManager],
+) -> int:
+    token_claims = jwt_manager.verify_access_token(token=access_token)
+    return int(token_claims.sub)

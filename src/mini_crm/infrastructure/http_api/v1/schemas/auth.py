@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field
 
-from mini_crm.application.users.dtos import RegisterUserDto
+from mini_crm.application.users.dtos import LoginUserDto, RegisterUserDto
 
 
 class RegisterUserSchema(BaseModel):
@@ -21,7 +21,13 @@ class RegisterUserSchema(BaseModel):
 
 
 class LoginSchema(BaseModel):
-    """Схема логина"""
+    """Схема входа по email и паролю"""
 
-    email: EmailStr
-    password: str
+    email: EmailStr = Field(..., description="Email пользователя")
+    password: str = Field(..., description="Пароль")
+
+    def to_dto(self) -> LoginUserDto:
+        return LoginUserDto(
+            email=str(self.email),
+            password=self.password,
+        )
