@@ -3,7 +3,24 @@ from datetime import date, datetime
 from pydantic import BaseModel, Field
 
 from mini_crm.application.organizations.dtos import OrganizationMemberDto
-from mini_crm.application.tasks.dtos import GetTasksByCriteriaDto, TaskShortDto
+from mini_crm.application.tasks.dtos import CreateTaskDto, GetTasksByCriteriaDto, TaskShortDto
+
+
+class CreateTaskSchema(BaseModel):
+    """Схема создания задачи"""
+
+    deal_id: int = Field(..., description="ID сделки")
+    title: str = Field(..., description="Заголовок задачи")
+    description: str = Field(..., description="Описание задачи")
+    due_date: date = Field(..., description="Срок выполнения")
+
+    def to_dto(self) -> CreateTaskDto:
+        return CreateTaskDto(
+            deal_id=self.deal_id,
+            title=self.title,
+            description=self.description,
+            due_date=self.due_date,
+        )
 
 
 class GetTasksByCriteriaSchema(BaseModel):

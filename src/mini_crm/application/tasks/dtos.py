@@ -6,6 +6,16 @@ from mini_crm.application.organizations.dtos import OrganizationMemberDto
 
 
 @dataclass(kw_only=True)
+class CreateTaskDto:
+    """DTO создания задачи"""
+
+    deal_id: EntityId
+    title: str
+    description: str
+    due_date: date
+
+
+@dataclass(kw_only=True)
 class GetTasksByCriteriaDto:
     """Критерии для получения задач"""
 
