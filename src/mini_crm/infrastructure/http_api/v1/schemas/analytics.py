@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from mini_crm.application.deals.dtos import (
     DealsFunnelDto,
@@ -10,12 +10,6 @@ from mini_crm.application.deals.dtos import (
     DealStatusSummaryDto,
 )
 from mini_crm.application.deals.enums import DealStages, DealStatuses
-
-
-class GetDealsSummaryQuerySchema(BaseModel):
-    """Параметры запроса сводки по сделкам"""
-
-    new_deals_days: int = Field(default=30, description="Период для новых сделок (дней)")
 
 
 class DealStatusSummarySchema(BaseModel):

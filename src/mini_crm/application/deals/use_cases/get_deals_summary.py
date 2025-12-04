@@ -12,6 +12,9 @@ from mini_crm.application.organizations.dtos import OrganizationMemberDto
 class GetDealsSummaryUseCase:
     """Получить сводку по сделкам"""
 
+    _new_deals_days: int = 30
+    """Период для новых сделок (дней)"""
+
     def __init__(
         self,
         operation: AsyncOperation,
@@ -24,7 +27,6 @@ class GetDealsSummaryUseCase:
     async def execute(
         self,
         current_user: OrganizationMemberDto,
-        new_deals_days: int,
     ) -> DealsSummaryDto:
         organization_id = current_user.organization_id
 
@@ -38,7 +40,7 @@ class GetDealsSummaryUseCase:
             organization_id=organization_id,
         )
 
-        since = now_tz() - timedelta(days=new_deals_days)
+        since = now_tz() - timedelta(days=self._new_deals_days)
         new_deals_count = await self._deals_analytics_repo.get_new_deals_count(
             organization_id=organization_id,
             since=since,

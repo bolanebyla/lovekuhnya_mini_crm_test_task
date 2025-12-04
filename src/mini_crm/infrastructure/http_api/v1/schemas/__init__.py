@@ -5,7 +5,6 @@ from .analytics import (
     DealStageConversionSchema,
     DealStageFunnelItemSchema,
     DealStatusSummarySchema,
-    GetDealsSummaryQuerySchema,
 )
 from .auth import LoginSchema, RegisterUserSchema
 from .contacts import ContactShortSchema, CreateContactSchema, GetContactsByCriteriaSchema
