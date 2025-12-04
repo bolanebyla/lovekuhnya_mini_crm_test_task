@@ -1,4 +1,15 @@
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Table, Text, func
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Date,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    Table,
+    Text,
+    func,
+)
 
 from mini_crm.infrastructure.database.meta import metadata
 
@@ -31,7 +42,7 @@ tasks_table = Table(
     ),
     Column(
         "due_date",
-        DateTime(timezone=True),
+        Date,
         nullable=False,
         index=True,
     ),

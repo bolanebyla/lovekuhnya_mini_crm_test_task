@@ -1,2 +1,2 @@
 from .entities import Task
-from .interfaces import TasksRepo
+from .interfaces import TasksReadRepo, TasksRepo

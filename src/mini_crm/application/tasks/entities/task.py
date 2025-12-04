@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date, datetime
 
 from commons.entities import EntityId
 
@@ -12,6 +12,6 @@ class Task:
     deal_id: EntityId
     title: str
     description: str
-    due_date: datetime
+    due_date: date
     is_done: bool
     created_at: datetime

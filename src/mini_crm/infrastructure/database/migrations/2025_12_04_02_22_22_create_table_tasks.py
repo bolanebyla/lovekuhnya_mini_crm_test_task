@@ -22,7 +22,7 @@ def upgrade() -> None:
         sa.Column("deal_id", sa.Integer(), nullable=False),
         sa.Column("title", sa.String(), nullable=False),
         sa.Column("description", sa.Text(), nullable=False),
-        sa.Column("due_date", sa.DateTime(timezone=True), nullable=False),
+        sa.Column("due_date", sa.Date, nullable=False),
         sa.Column("is_done", sa.Boolean(), nullable=False),
         sa.Column(
             "created_at",
