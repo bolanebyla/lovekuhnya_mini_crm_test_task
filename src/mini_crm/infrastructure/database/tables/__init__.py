@@ -1,3 +1,4 @@
+from .activities import activities_table
 from .contacts import contacts_table
 from .deals import deals_table
 from .organization_members import organization_members_table
