@@ -5,12 +5,13 @@ from contextlib import asynccontextmanager
 from dishka import AsyncContainer
 from dishka.integrations.fastapi import setup_dishka
 from fastapi import APIRouter, FastAPI
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import RedirectResponse
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 
 from commons.app_errors import AppError
-from commons.http_api.exception_handlers import app_error_handler
+from commons.http_api.exception_handlers import app_error_handler, validation_exception_handler
 from mini_crm.infrastructure.http_api import (
     HttpApiPrometheusMetricsSettings,
     HttpApiSettings,
@@ -70,6 +71,7 @@ def create_app(
     app.include_router(api_router)
 
     app.add_exception_handler(AppError, app_error_handler)
+    app.add_exception_handler(RequestValidationError, validation_exception_handler)
 
     configure_prometheus_metrics_endpoint(
         app=app,
