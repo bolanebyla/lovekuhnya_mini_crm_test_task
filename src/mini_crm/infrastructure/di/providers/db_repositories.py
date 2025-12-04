@@ -2,7 +2,7 @@ from dishka import Provider, Scope, provide
 
 from mini_crm.application.activities.interfaces import ActivitiesReadRepo, ActivitiesRepo
 from mini_crm.application.contacts.interfaces import ContactsReadRepo, ContactsRepo
-from mini_crm.application.deals.interfaces import DealsRepo
+from mini_crm.application.deals.interfaces import DealsAnalyticsRepo, DealsRepo
 from mini_crm.application.organizations.interfaces import (
     OrganizationMembersReadRepo,
     OrganizationMembersRepo,
@@ -16,6 +16,7 @@ from mini_crm.infrastructure.database.repositories import (
     ActivitiesRepoImpl,
     ContactsReadRepoImpl,
     ContactsRepoImpl,
+    DealsAnalyticsRepoImpl,
     DealsRepoImpl,
     OrganizationMembersReadRepoImpl,
     OrganizationMembersRepoImpl,
@@ -43,6 +44,7 @@ class DBRepositoriesProvider(Provider):
     contacts_read_repo = provide(ContactsReadRepoImpl, provides=ContactsReadRepo)
     contacts_repo = provide(ContactsRepoImpl, provides=ContactsRepo)
     deals_repo = provide(DealsRepoImpl, provides=DealsRepo)
+    deals_analytics_repo = provide(DealsAnalyticsRepoImpl, provides=DealsAnalyticsRepo)
     tasks_read_repo = provide(TasksReadRepoImpl, provides=TasksReadRepo)
     tasks_repo = provide(TasksRepoImpl, provides=TasksRepo)
     activities_read_repo = provide(ActivitiesReadRepoImpl, provides=ActivitiesReadRepo)

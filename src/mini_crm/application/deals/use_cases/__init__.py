@@ -1,1 +1,2 @@
 from .create_deal import CreateDealUseCase
+from .get_deals_summary import GetDealsSummaryUseCase

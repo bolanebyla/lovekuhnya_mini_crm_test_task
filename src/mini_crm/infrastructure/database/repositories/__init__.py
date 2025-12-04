@@ -2,6 +2,7 @@ from .activities_read_repo import ActivitiesReadRepoImpl
 from .activities_repo import ActivitiesRepoImpl
 from .contacts_read_repo import ContactsReadRepoImpl
 from .contacts_repo import ContactsRepoImpl
+from .deals_analytics_repo import DealsAnalyticsRepoImpl
 from .deals_repo import DealsRepoImpl
 from .organization_members_read_repo import OrganizationMembersReadRepoImpl
 from .organization_members_repo import OrganizationMembersRepoImpl

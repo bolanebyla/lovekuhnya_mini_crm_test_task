@@ -1,4 +1,5 @@
 from .activities import activities_v1_router
+from .analytics import analytics_v1_router
 from .auth import auth_v1_router
 from .contacts import contacts_v1_router
 from .deals import deals_v1_router
