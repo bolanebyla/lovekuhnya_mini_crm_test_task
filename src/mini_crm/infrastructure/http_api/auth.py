@@ -13,7 +13,7 @@ from mini_crm.application.organizations.errors import (
 from mini_crm.application.organizations.use_cases import GetOrganizationMemberByUserUseCase
 
 oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl="/api/v1/auth/login",
+    tokenUrl="/api/v1/auth/oauth2_login",
 )
 
 
