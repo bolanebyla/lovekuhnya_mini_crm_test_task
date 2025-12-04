@@ -1,8 +1,59 @@
 from dataclasses import dataclass
+from datetime import datetime
 from decimal import Decimal
+from enum import StrEnum
 
+from commons.dtos.pagination import PaginatedRequestDto
 from commons.entities import EntityId
 from mini_crm.application.deals.enums import DealStages, DealStatuses
+from mini_crm.application.organizations.dtos import OrganizationMemberDto
+
+
+class DealOrderBy(StrEnum):
+    """Поля для сортировки сделок"""
+
+    CREATED_AT = "created_at"
+    AMOUNT = "amount"
+    UPDATED_AT = "updated_at"
+
+
+class OrderDirection(StrEnum):
+    """Направление сортировки"""
+
+    ASC = "asc"
+    DESC = "desc"
+
+
+@dataclass(kw_only=True)
+class GetDealsByCriteriaDto(PaginatedRequestDto):
+    """Критерии для получения сделок"""
+
+    current_user: OrganizationMemberDto
+
+    statuses: list[DealStatuses] | None = None
+    stage: DealStages | None = None
+    min_amount: Decimal | None = None
+    max_amount: Decimal | None = None
+    owner_id: EntityId | None = None
+
+    order_by: DealOrderBy = DealOrderBy.CREATED_AT
+    order: OrderDirection = OrderDirection.DESC
+
+
+@dataclass(kw_only=True)
+class DealShortDto:
+    """Краткая информация по сделке"""
+
+    id: EntityId
+    contact_id: EntityId
+    owner_id: EntityId
+    title: str
+    amount: Decimal
+    currency: str
+    status: DealStatuses
+    stage: DealStages
+    created_at: datetime
+    updated_at: datetime
 
 
 @dataclass(kw_only=True)

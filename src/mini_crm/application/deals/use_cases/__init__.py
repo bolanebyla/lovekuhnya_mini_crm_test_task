@@ -1,3 +1,4 @@
 from .create_deal import CreateDealUseCase
+from .get_deals_by_criteria import GetDealsByCriteriaUseCase
 from .get_deals_funnel import GetDealsFunnelUseCase
 from .get_deals_summary import GetDealsSummaryUseCase

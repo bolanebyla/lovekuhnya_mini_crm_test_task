@@ -1,1 +1,1 @@
-from .repositories import DealsAnalyticsRepo, DealsRepo
+from .repositories import DealsAnalyticsRepo, DealsReadRepo, DealsRepo

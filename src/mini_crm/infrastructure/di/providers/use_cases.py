@@ -10,6 +10,7 @@ from mini_crm.application.contacts.use_cases import (
 )
 from mini_crm.application.deals.use_cases import (
     CreateDealUseCase,
+    GetDealsByCriteriaUseCase,
     GetDealsFunnelUseCase,
     GetDealsSummaryUseCase,
 )
@@ -30,6 +31,7 @@ class UseCasesProvider(Provider):
     get_contacts_by_criteria = provide(GetContactsByCriteriaUseCase)
     create_contact = provide(CreateContactUseCase)
     create_deal = provide(CreateDealUseCase)
+    get_deals_by_criteria = provide(GetDealsByCriteriaUseCase)
     update_deal = provide(UpdateDealUseCase)
     get_deals_summary = provide(GetDealsSummaryUseCase)
     get_deals_funnel = provide(GetDealsFunnelUseCase)

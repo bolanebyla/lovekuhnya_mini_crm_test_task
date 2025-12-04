@@ -19,6 +19,7 @@ from mini_crm.application.contacts.use_cases import (
 )
 from mini_crm.application.deals.use_cases import (
     CreateDealUseCase,
+    GetDealsByCriteriaUseCase,
     GetDealsFunnelUseCase,
     GetDealsSummaryUseCase,
 )
@@ -53,6 +54,10 @@ class MockUseCasesProvider(Provider):
     @provide
     def create_deal(self) -> CreateDealUseCase:
         return self._mocks.get(CreateDealUseCase, AsyncMock())
+
+    @provide
+    def get_deals_by_criteria(self) -> GetDealsByCriteriaUseCase:
+        return self._mocks.get(GetDealsByCriteriaUseCase, AsyncMock())
 
     @provide
     def update_deal(self) -> UpdateDealUseCase:
