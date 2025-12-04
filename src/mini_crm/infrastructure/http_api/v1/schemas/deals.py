@@ -30,4 +30,8 @@ class UpdateDealSchema(BaseModel):
     stage: DealStages
 
     def to_dto(self, deal_id: int) -> UpdateDealDto:
-        return UpdateDealDto(deal_id=deal_id, status=self.status, stage=self.stage)
+        return UpdateDealDto(
+            deal_id=deal_id,
+            status=self.status,
+            stage=self.stage,
+        )
