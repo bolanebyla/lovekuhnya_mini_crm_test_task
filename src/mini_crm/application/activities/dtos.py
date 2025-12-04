@@ -7,6 +7,14 @@ from mini_crm.application.activities.enums import ActivityTypes
 
 
 @dataclass(kw_only=True)
+class CreateActivityDto:
+    """DTO создания активности"""
+
+    type: ActivityTypes
+    payload: dict[str, Any]
+
+
+@dataclass(kw_only=True)
 class ActivityDto:
     """Информация по активности"""
 

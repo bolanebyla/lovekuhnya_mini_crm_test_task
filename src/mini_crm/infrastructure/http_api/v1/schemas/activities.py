@@ -1,10 +1,23 @@
 from datetime import datetime
-from typing import Any
+from typing import Any, Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-from mini_crm.application.activities.dtos import ActivityDto
+from mini_crm.application.activities.dtos import ActivityDto, CreateActivityDto
 from mini_crm.application.activities.enums import ActivityTypes
+
+
+class CreateActivitySchema(BaseModel):
+    """Схема создания активности"""
+
+    type: Literal[ActivityTypes.COMMENT] = Field(..., description="Тип активности")
+    payload: dict[str, Any] = Field(..., description="Данные активности")
+
+    def to_dto(self) -> CreateActivityDto:
+        return CreateActivityDto(
+            type=ActivityTypes(self.type),
+            payload=self.payload,
+        )
 
 
 class ActivityShortSchema(BaseModel):

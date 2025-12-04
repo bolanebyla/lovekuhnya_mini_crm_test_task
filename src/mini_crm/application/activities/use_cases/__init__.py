@@ -1,1 +1,2 @@
+from .create_manual_deal_activity import CreateManualDealActivityUseCase
 from .get_activities_by_deal import GetActivitiesByDealUseCase

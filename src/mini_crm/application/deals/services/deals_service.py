@@ -16,7 +16,30 @@ class DealsService:
         deal_id: EntityId,
         current_user: OrganizationMemberDto,
     ) -> Deal:
-        """Получает сделку по ID и проверяет, что она принадлежит организации пользователя"""
+        """Получает сделку по id и проверяет, что она принадлежит организации пользователя"""
+        deal = await self._get_deal_with_access_check(
+            deal_id=deal_id,
+            current_user=current_user,
+        )
+        return deal
+
+    async def check_deal_access(
+        self,
+        deal_id: EntityId,
+        current_user: OrganizationMemberDto,
+    ) -> None:
+        """Проверяет существование сделки и принадлежность организации пользователя"""
+        await self._get_deal_with_access_check(
+            deal_id=deal_id,
+            current_user=current_user,
+        )
+
+    async def _get_deal_with_access_check(
+        self,
+        deal_id: EntityId,
+        current_user: OrganizationMemberDto,
+    ) -> Deal:
+        """Получает сделку и проверяет доступ"""
         deal = await self._deals_repo.get_by_id(id_=deal_id)
         if deal is None:
             raise EntityNotFoundByIdError(

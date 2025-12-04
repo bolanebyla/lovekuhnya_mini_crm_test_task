@@ -1,4 +1,4 @@
-from .activities import ActivityShortSchema
+from .activities import ActivityShortSchema, CreateActivitySchema
 from .contacts import ContactShortSchema, CreateContactSchema, GetContactsByCriteriaSchema
 from .deals import CreateDealSchema, UpdateDealSchema
 from .organizations import UserOrganizationSchema
