@@ -11,6 +11,7 @@
 - **[Pydantic](https://docs.pydantic.dev/)** - валидация данных и настройки
 - **[SQLAlchemy](https://www.sqlalchemy.org/)** - работа с БД
 - **[Alembic](https://alembic.sqlalchemy.org/)** - управление миграциями
+- **[Cashews](https://pypi.org/project/cashews/)** - кэширование 
 - **[UV](https://github.com/astral-sh/uv)** - менеджер пакетов Python
 
 ## 🏗 Архитектура
